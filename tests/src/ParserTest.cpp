@@ -48,9 +48,9 @@ TEST_CASE("Overlap and empty intervals", "[EmptyWithOverlap]") {
 
     rnlp::ParsedString result = p.parseString(str);
 
-    for (auto& component : result.components) {
-        std::cout << component.content << std::endl;
-    }
+    //for (auto& component : result.components) {
+        //std::cout << component.content << std::endl;
+    //}
 
     REQUIRE(result.components.size() == 5);
     REQUIRE(result->at(0).content == "No. ");
