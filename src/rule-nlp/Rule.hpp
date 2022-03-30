@@ -14,12 +14,14 @@ class Rule {
 public:
     const std::regex pattern;
     const std::string category;
+    const long long score;
 
-    Rule(const std::string& pattern, const std::string& category)
-        : pattern(pattern), category(category) {}
+    Rule(const std::string& pattern, const std::string& category, const long long& score = 0)
+        : pattern(pattern, std::regex_constants::icase), category(category), score(score) {}
 
-    Rule(const std::regex& pattern, const std::string& category)
-        : pattern(pattern), category(category) {}
+    Rule(const std::regex& pattern, const std::string& category, const long long& score = 0)
+        : pattern(pattern), category(category), score(score) {}
+
 
     std::vector<SubMatch> match(std::string& input) {
         const auto end = std::sregex_iterator();
@@ -34,7 +36,8 @@ public:
                 static_cast<size_t>(m.position()),
                 m.position() + m.str().size() - 1,
                 m.str(),
-                category
+                category,
+                score
             });
         }
 

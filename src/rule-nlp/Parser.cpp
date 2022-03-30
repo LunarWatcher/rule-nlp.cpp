@@ -1,6 +1,7 @@
 #include "Parser.hpp"
 #include "SubMatch.hpp"
 #include <algorithm>
+#include <numeric>
 
 namespace rnlp {
 
@@ -42,13 +43,17 @@ ParsedString Parser::parseString(const std::string& source) {
             components.back().end + 1,
             source.size() - 1,
             source.substr(components.back().end + 1, source.size() - components.back().end),
-            "none"
+            "none",
+            -1
         });
     }
 
     // And end off with a final sort
     std::sort(result.begin(), result.end());
-    return ParsedString(source, result);
+    return ParsedString(source, result,
+        std::accumulate(result.begin(), result.end(), 0ll, [](long long last, const auto& r) {
+        return last + r.score;
+    }));
 }
 
 bool operator<(const SubMatch& lhs, const SubMatch& rhs) {

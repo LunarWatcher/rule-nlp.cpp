@@ -1,4 +1,4 @@
-add_executable(tests src/TestRunner.cpp
+add_executable(rnlptests src/TestRunner.cpp
     src/ParserTest.cpp
 )
 
@@ -12,7 +12,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-target_link_libraries(tests Catch2::Catch2)
+target_link_libraries(rnlptests Catch2::Catch2)
 # }}}
 
-target_link_libraries(tests rule-nlp)
+target_link_libraries(rnlptests rule-nlp)
