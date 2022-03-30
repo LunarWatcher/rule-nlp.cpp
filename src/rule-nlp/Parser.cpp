@@ -33,7 +33,8 @@ ParsedString Parser::parseString(const std::string& source) {
                 prevEnd + (prevEnd == 0 ? 0 : 1),
                 currStart - 1,
                 match,
-                "none"
+                "none",
+                -1
             });
         }
     }

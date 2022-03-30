@@ -61,3 +61,30 @@ TEST_CASE("Overlap and empty intervals", "[EmptyWithOverlap]") {
 
     REQUIRE(result.components.back().end == str.size() - 1);
 }
+
+TEST_CASE("Verify score", "[ScoreTest]") {
+    const std::string str = "No. Thank you and have a nice day, Olivia";
+
+    rnlp::Parser p({
+        {
+            std::regex("thanks? you", std::regex_constants::icase),
+            "gratitude",
+            15
+        },
+        {
+            std::regex("have a nice day", std::regex_constants::icase),
+            "fluff",
+            9
+        },
+        {
+            std::regex("((and|or) ?)+"),
+            "binder",
+            0
+        }
+    });
+
+    rnlp::ParsedString result = p.parseString(str);
+    // gratitude + fluff - 2 * unidentified
+    REQUIRE(result.sum == 15 + 9 - 2);
+
+}
