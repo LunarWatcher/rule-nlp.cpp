@@ -91,3 +91,23 @@ TEST_CASE("Verify score", "[ScoreTest]") {
     REQUIRE(result.reasonCounts["gratitude"] == 1);
 
 }
+
+TEST_CASE("Verify intervals in intervals", "[edgecase]") {
+    const std::string str = "No. Thank you";
+    rnlp::Parser p({
+        {
+            "thank you",
+            "thanks"
+        },
+        {
+            "thank",
+            "thanks"
+        }
+    });
+
+    auto res = p.parseString(str);
+    REQUIRE(res->at(0).content == "No. ");
+    REQUIRE(res->at(1).content == "Thank you");
+    REQUIRE(res->at(2).content == "Thank");
+    REQUIRE(res->size() == 3);
+}

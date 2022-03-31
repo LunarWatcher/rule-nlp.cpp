@@ -18,16 +18,16 @@ ParsedString Parser::parseString(const std::string& source) {
 
     std::sort(components.begin(), components.end());
     auto result = components;
+    size_t prevEnd = 0;
 
     for (int i = 0; i < components.size(); ++i) {
-        size_t prevEnd = i == 0 ? 0 : components.at(i - 1).end;
         size_t currStart = components.at(i).start;
 
         if (prevEnd + 1 < currStart) {
             auto match = source.substr(prevEnd + (prevEnd == 0 ? 0 : 1), currStart - prevEnd - (prevEnd == 0 ? 0 : 1));
             if (match.find_first_not_of(" ") == std::string::npos) {
                 // Let's ignore space-only blocks
-                continue;
+                goto esc;
             }
             result.push_back({
                 prevEnd + (prevEnd == 0 ? 0 : 1),
@@ -37,9 +37,17 @@ ParsedString Parser::parseString(const std::string& source) {
                 -1
             });
         }
+esc:
+        // Edge-case management: interval within interval, i.e.
+        //   aaabbbbbaaaa
+        // a ^^^^^^^^^^^^
+        // b    ^^^^^
+        if (components.at(i).end > prevEnd) {
+            prevEnd = components.at(i).end;
+        }
     }
     // Sneak in trailing groups
-    if (components.size() > 0 && components.back().end != source.size() - 1) {
+    if (components.size() > 0 && prevEnd != source.size() - 1) {
         result.push_back({
             components.back().end + 1,
             source.size() - 1,
