@@ -86,5 +86,8 @@ TEST_CASE("Verify score", "[ScoreTest]") {
     rnlp::ParsedString result = p.parseString(str);
     // gratitude + fluff - 2 * unidentified
     REQUIRE(result.sum == 15 + 9 - 2);
+    REQUIRE(result.reasonCounts["none"] == 2);
+    REQUIRE(result.reasonCounts["fluff"] == 1);
+    REQUIRE(result.reasonCounts["gratitude"] == 1);
 
 }

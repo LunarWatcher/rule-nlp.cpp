@@ -24,10 +24,12 @@ public:
     const std::string original;
 
     std::vector<SubMatch> components;
-    const long long sum;
+    std::map<std::string, size_t> reasonCounts;
 
-    ParsedString(const std::string& original, const std::vector<SubMatch>& components, long long sum)
-        : original(original), components(components), sum(sum) {}
+    long long sum;
+
+    ParsedString(const std::string& original, const std::vector<SubMatch>& components)
+        : original(original), components(components) {}
 
     std::vector<SubMatch>* operator->();
 };

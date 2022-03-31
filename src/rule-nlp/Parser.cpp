@@ -51,10 +51,20 @@ ParsedString Parser::parseString(const std::string& source) {
 
     // And end off with a final sort
     std::sort(result.begin(), result.end());
-    return ParsedString(source, result,
-        std::accumulate(result.begin(), result.end(), 0ll, [](long long last, const auto& r) {
-        return last + r.score;
-    }));
+    auto p = ParsedString(source, result);
+    
+    size_t sum = 0;
+    for (auto& result : result) {
+        sum += result.score;
+        if (!p.reasonCounts.contains(result.category)) {
+            p.reasonCounts[result.category] = 1;
+        } else {
+            p.reasonCounts[result.category] += 1;
+        }
+    }
+
+    p.sum = sum;
+    return p;
 }
 
 bool operator<(const SubMatch& lhs, const SubMatch& rhs) {
