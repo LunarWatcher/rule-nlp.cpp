@@ -13,14 +13,20 @@ namespace rnlp {
 class Rule {
 public:
     const std::regex pattern;
+
+    /**
+     * The original pattern.
+     * Primarily stored to enable sanity-checks in complex programs
+     */
+    const std::string source;
     const std::string category;
     const long long score;
 
     Rule(const std::string& pattern, const std::string& category, const long long& score = 0)
-        : pattern(pattern, std::regex_constants::icase), category(category), score(score) {}
+        : pattern(pattern, std::regex_constants::icase), source(pattern), category(category), score(score) {}
 
     Rule(const std::regex& pattern, const std::string& category, const long long& score = 0)
-        : pattern(pattern), category(category), score(score) {}
+        : pattern(pattern), source(""), category(category), score(score) {}
 
 
     std::vector<SubMatch> match(std::string& input) {
