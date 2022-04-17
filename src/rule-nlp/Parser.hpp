@@ -2,9 +2,10 @@
 
 #include <string>
 #include <vector>
+
 #if __has_include(<format>)
 #include <format>
-using fmt = std;
+namespace fmt = std;
 
 #define HAS_FMT
 #elif __has_include(<fmt/format.h>)
@@ -12,6 +13,7 @@ using fmt = std;
 
 #define HAS_FMT
 #endif
+
 #ifdef HAS_FMT
 #include <sstream>
 #endif
