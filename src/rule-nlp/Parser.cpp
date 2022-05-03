@@ -61,7 +61,7 @@ esc:
     std::sort(result.begin(), result.end());
     auto p = ParsedString(source, result);
     
-    size_t sum = 0;
+    long long sum = 0;
     for (auto& result : result) {
         sum += result.score;
         if (!p.reasonCounts.contains(result.category)) {
