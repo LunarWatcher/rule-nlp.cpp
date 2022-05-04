@@ -1,5 +1,6 @@
 add_executable(rnlptests src/TestRunner.cpp
     src/ParserTest.cpp
+    src/ScoreTest.cpp
 )
 
 # Catch2 {{{
