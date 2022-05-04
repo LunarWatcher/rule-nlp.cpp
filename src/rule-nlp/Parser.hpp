@@ -51,7 +51,7 @@ public:
 };
 
 inline std::ostream& operator<<(std::ostream& os, const ParsedString& p) {
-    os << "ParsedString[" << p.components.size()
+    os << "ParsedString[" << p.sum
         << ",\n"
         << "Original: " << p.original << "\n";
     for (auto& component : p.components) {
