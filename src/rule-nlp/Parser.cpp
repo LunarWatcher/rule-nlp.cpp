@@ -42,14 +42,12 @@ esc:
         //   aaabbbbbaaaa
         // a ^^^^^^^^^^^^
         // b    ^^^^^
-        if (components.at(i).end > prevEnd) {
-            prevEnd = components.at(i).end;
-        }
+        prevEnd = std::max(prevEnd, components.at(i).end);
     }
     // Sneak in trailing groups
     if (components.size() > 0 && prevEnd != source.size() - 1) {
         result.push_back({
-            components.back().end + 1,
+            prevEnd + 1,
             source.size() - 1,
             source.substr(components.back().end + 1, source.size() - components.back().end),
             "none",
