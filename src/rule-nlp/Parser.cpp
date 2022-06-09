@@ -49,7 +49,7 @@ esc:
         result.push_back({
             prevEnd + 1,
             source.size() - 1,
-            source.substr(components.back().end + 1, source.size() - components.back().end),
+            source.substr(prevEnd + 1, source.size() - prevEnd),
             "none",
             -1
         });
