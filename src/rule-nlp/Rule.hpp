@@ -20,12 +20,12 @@ public:
      */
     const std::string source;
     const std::string category;
-    const long long score;
+    const int64_t score;
 
-    Rule(const std::string& pattern, const std::string& category, const long long& score = 0)
+    Rule(const std::string& pattern, const std::string& category, const int64_t& score = 0)
         : pattern(pattern, std::regex_constants::icase), source(pattern), category(category), score(score) {}
 
-    Rule(const std::regex& pattern, const std::string& category, const long long& score = 0)
+    Rule(const std::regex& pattern, const std::string& category, const int64_t& score = 0)
         : pattern(pattern), source(""), category(category), score(score) {}
 
 

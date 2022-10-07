@@ -42,7 +42,7 @@ public:
     std::vector<SubMatch> components;
     std::map<std::string, size_t> reasonCounts;
 
-    long long sum;
+    int64_t sum;
 
     ParsedString(const std::string& original, const std::vector<SubMatch>& components)
         : original(original), components(components) {}
