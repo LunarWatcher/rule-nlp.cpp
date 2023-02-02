@@ -22,7 +22,7 @@ set (CMAKE_CXX_STANDARD 20)
 #conan_basic_setup()
 
 add_subdirectory(src)
-add_subdirectory(tests)
+add_subdirectory(tests EXCLUDE_FROM_ALL)
 
 export(TARGETS rule-nlp NAMESPACE rulenlp FILE rulenlp.cmake)
 
