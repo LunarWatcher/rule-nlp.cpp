@@ -4,14 +4,9 @@
 #include <vector>
 #include <map>
 
-#if __has_include(<format>)
-#include <format>
-namespace fmt = std;
 
-#define HAS_FMT
-#elif __has_include(<fmt/format.h>)
+#if __has_include(<fmt/format.h>)
 #include <fmt/format.h>
-
 #define HAS_FMT
 #endif
 
